@@ -8,11 +8,12 @@ if (!command) {
     process.exit(1);
 }
 
+const [, , , ...args] = process.argv;
 
 function main() {
     switch (command) {
         case 'quote':
-            getQuote();
+            getQuote(args);
             break;
         case 'swap':
             swapTokens();
