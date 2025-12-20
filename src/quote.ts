@@ -1,6 +1,6 @@
 
 import BN from 'bn.js';
-import { logger, jupApiClient, SLIPPAGE_BPS, tokens } from './common';
+import { jupApiClient, SLIPPAGE_BPS, tokens } from './common';
 import { QuoteGetRequest, QuoteResponse } from '@jup-ag/api';
 
 export async function getQuote(args: string[]) {
@@ -33,7 +33,6 @@ export async function getQuote(args: string[]) {
         slippageBps: SLIPPAGE_BPS
     };
     const quote: QuoteResponse = await jupApiClient.quoteGet(params);
-
     if (!quote) {
         throw new Error("Failed to get a quote");
     }

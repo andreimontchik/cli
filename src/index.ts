@@ -1,6 +1,7 @@
 import { logger } from './common';
 import { getQuote } from './quote';
 import { swapTokens } from './swap';
+import { ResponseError } from '@jup-ag/api';
 
 const command = process.argv[2];
 if (!command) {
@@ -10,17 +11,25 @@ if (!command) {
 
 const [, , , ...args] = process.argv;
 
-function main() {
-    switch (command) {
-        case 'quote':
-            getQuote(args);
-            break;
-        case 'swap':
-            swapTokens();
-            break;
-        default:
-            logger.error(`Unsupported command: ${command}`);
-            process.exit(1);
+async function main() {
+    try {
+        switch (command) {
+            case 'quote':
+                await getQuote(args);
+                break;
+            case 'swap':
+                await swapTokens();
+                break;
+            default:
+                logger.error(`Unsupported command: ${command}`);
+                process.exit(1);
+        }
+    } catch (error) {
+        console.error(`Failed to run the script: ${error}`);
+        if (error instanceof ResponseError) {
+            console.error(`Response status: ${error.response.status} - ${error.response.statusText}`);
+        }
+        process.exit(1);
     }
 }
 
