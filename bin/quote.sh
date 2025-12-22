@@ -5,16 +5,16 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-if [ -z "$RESEARCH_SCRIPTS_PATH" ]; then
-    echo "ERROR: RESEARCH_SCRIPTS_PATH is not set."
+if [ -z "$RESEARCH_CLI_PATH" ]; then
+    echo "ERROR: RESEARCH_CLI_PATH is not set."
     exit 1  
 else
-    echo "RESEARCH_SCRIPTS_PATH is set to: $RESEARCH_SCRIPTS_PATH"
+    echo "RESEARCH_CLI_PATH is set to: $RESEARCH_CLI_PATH"
 fi
 
 set -euo pipefail
 
-pushd $RESEARCH_SCRIPTS_PATH > /dev/null
+pushd $RESEARCH_CLI_PATH > /dev/null
 
 set -a
 source .env
