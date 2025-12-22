@@ -1,3 +1,4 @@
+import { SendTransactionError } from '@solana/web3.js';
 import { logger } from './common';
 import { getQuote } from './quote';
 import { swapTokens } from './swap';
@@ -18,16 +19,20 @@ async function main() {
                 await getQuote(args);
                 break;
             case 'swap':
-                await swapTokens();
+                await swapTokens(args);
                 break;
             default:
                 logger.error(`Unsupported command: ${command}`);
                 process.exit(1);
         }
     } catch (error) {
-        console.error(`Failed to run the script: ${error}`);
+        console.error(`Failed to run the script:`);
         if (error instanceof ResponseError) {
-            console.error(`Response status: ${error.response.status} - ${error.response.statusText}`);
+            console.error(await error.response.json());
+        } else if (error instanceof SendTransactionError) {
+            console.error(error.message);
+        } else {
+            console.error(error);
         }
         process.exit(1);
     }

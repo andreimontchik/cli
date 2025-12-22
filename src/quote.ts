@@ -3,7 +3,7 @@ import BN from 'bn.js';
 import { jupApiClient, SLIPPAGE_BPS, tokens } from './common';
 import { QuoteGetRequest, QuoteResponse } from '@jup-ag/api';
 
-export async function getQuote(args: string[]) {
+export async function getQuote(args: string[]): Promise<QuoteResponse> {
 
     const [inputToken, outputToken, inputAmountStr] = args;
 
@@ -34,7 +34,7 @@ export async function getQuote(args: string[]) {
     };
     const quote: QuoteResponse = await jupApiClient.quoteGet(params);
     if (!quote) {
-        throw new Error("Failed to get a quote");
+        throw new Error("Quote response is empty");
     }
 
     console.log("--- Quote ---");

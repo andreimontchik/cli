@@ -6,11 +6,12 @@ if [ -z "$RESEARCH_CLI_PATH" ]; then
 else
     echo "RESEARCH_CLI_PATH is set to: $RESEARCH_CLI_PATH"
 fi
-
 if [ "$#" -ne 3 ]; then
-    echo "Usage: bash quote.sh <INPUT_TOKEN> <OUTPOUT_TOKEN> <INPUT_AMOUNT>"
+    echo "Usage: bash swap.sh <INPUT_TOKEN> <OUTPOUT_TOKEN> <INPUT_AMOUNT>"
     exit 1
 fi
+
+set -euo pipefail
 
 set -euo pipefail
 
@@ -21,6 +22,6 @@ source .env
 set +a
 
 npm run build
-npm run js "quote" "$@"
+npm run js "swap" "$@"
 
 popd > /dev/null

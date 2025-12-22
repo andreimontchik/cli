@@ -15,6 +15,7 @@ A collection of useful command line scripts
 1. Configure aliases for running shell scripts in `.bashrc`: 
    ```
    alias quote="$RESEARCH_CLI_PATH/bin/quote.sh"
+   alias swap="$RESEARCH_CLI_PATH/bin/swap.sh"
    ```   
 ## Maintain
 ## Upgrade Dependencies
