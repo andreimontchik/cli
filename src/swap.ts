@@ -14,6 +14,7 @@ export async function swapTokens(args: string[]) {
             quoteResponse: quote,
             userPublicKey: wallet.publicKey.toBase58(),
             dynamicComputeUnitLimit: true,
+            wrapAndUnwrapSol: false,
         }
     };
 
