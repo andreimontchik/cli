@@ -1,16 +1,17 @@
 
 import BN from 'bn.js';
-import { jupApiClient, SLIPPAGE_BPS, tokens } from './common';
+import { jupApiClient, SLIPPAGE_BPS } from './common';
 import { QuoteGetRequest, QuoteResponse } from '@jup-ag/api';
+import { getToken } from './mints';
 
 export async function getQuote(args: string[]): Promise<QuoteResponse> {
 
-    const [inputToken, outputToken, inputAmountStr] = args;
+    const [inputToken, inputAmountStr, outputToken] = args;
 
     if (!inputToken) {
         throw new Error("Missing input token");
     }
-    const inputMint = tokens[inputToken];
+    const inputMint = getToken(inputToken);
     if (!inputMint) {
         throw new Error(`Unsupported input token: ${inputToken}`);
     }
@@ -18,17 +19,17 @@ export async function getQuote(args: string[]): Promise<QuoteResponse> {
     if (!outputToken) {
         throw new Error("Missing output token");
     }
-    const outputMint = tokens[outputToken];
+    const outputMint = getToken(outputToken);
     if (!outputMint) {
         throw new Error(`Unsupported output token: ${outputToken}`);
     }
-    const inputAmount = new BN(inputAmountStr);
+    const inputAmount = new BN(Math.round(parseFloat(inputAmountStr) * 10 ** inputMint.decimals));
 
-    console.log(`Quoting ${inputAmount.toString()} of ${inputToken} in ${outputToken}... `);
+    console.log(`Quoting ${inputAmountStr} of ${inputToken} in ${outputToken}... `);
 
     const params: QuoteGetRequest = {
-        inputMint: inputMint.toString(),
-        outputMint: outputMint.toString(),
+        inputMint: inputMint.mint.toString(),
+        outputMint: outputMint.mint.toString(),
         amount: inputAmount.toNumber(),
         slippageBps: SLIPPAGE_BPS
     };

@@ -8,7 +8,7 @@ else
 fi
 
 if [ "$#" -ne 3 ]; then
-    echo "Usage: bash quote.sh <INPUT_TOKEN> <OUTPOUT_TOKEN> <INPUT_AMOUNT>"
+    echo "Usage: bash quote.sh <INPUT_TOKEN> <INPUT_AMOUNT> <OUTPOUT_TOKEN>"
     exit 1
 fi
 

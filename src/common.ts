@@ -25,10 +25,6 @@ export const logger = pino({
 
 dotenv.config();
 
-export const tokensFile = process.env.TOKENS_FILE
-    ? process.env.TOKENS_FILE
-    : (() => { throw new Error('Environment variable TOKENS_FILE is not set.'); })();
-
 export const wallet = process.env.WALLET
     ? Keypair.fromSecretKey(Uint8Array.from(JSON.parse(process.env.WALLET)))
     : (() => { throw new Error('Environment variable WALLET is not set.'); })();
@@ -49,18 +45,6 @@ export const SLIPPAGE_BPS = process.env.SLIPPAGE_BPS ? parseInt(process.env.SLIP
     : (() => { throw new Error('Environment variable SLIPPAGE_BPS is not set.'); })();
 
 export const connection = new Connection(rpcUrl, 'confirmed');
-
-const filePath = path.resolve(__dirname, tokensFile);
-const tokensRaw = JSON.parse(
-    fs.readFileSync(filePath, 'utf8')
-);
-
-export const tokens: TokenMap = Object.fromEntries(
-    Object.entries(tokensRaw).map(([symbol, mint]) => [
-        symbol,
-        new PublicKey(mint),
-    ])
-)
 
 export const jupApiClient = createJupiterApiClient({
     apiKey: jupApiKey,
