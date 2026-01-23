@@ -6,8 +6,8 @@ if [ -z "$RESEARCH_CLI_PATH" ]; then
 else
     echo "RESEARCH_CLI_PATH is set to: $RESEARCH_CLI_PATH"
 fi
-if [ "$#" -ne 3 ]; then
-    echo "Usage: bash swap.sh <INPUT_TOKEN> <OUTPOUT_TOKEN> <INPUT_AMOUNT>"
+if [ "$#" -lt 3 ]; then
+    echo "Usage: bash swap.sh <INPUT_TOKEN> <OUTPUT_TOKEN> <INPUT_AMOUNT> [ONLY_DIRECT_ROUTES: true|false (default: false)]"
     exit 1
 fi
 

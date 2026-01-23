@@ -6,7 +6,8 @@ import { getToken } from './mints';
 
 export async function getQuote(args: string[]): Promise<QuoteResponse> {
 
-    const [inputToken, inputAmountStr, outputToken] = args;
+    const [inputToken, inputAmountStr, outputToken, onlyDirectRoutesStr = "true"] = args;
+    const onlyDirectRoutes = onlyDirectRoutesStr.toLowerCase() === "true";
 
     if (!inputToken) {
         throw new Error("Missing input token");
@@ -31,6 +32,7 @@ export async function getQuote(args: string[]): Promise<QuoteResponse> {
         inputMint: inputMint.mint.toString(),
         outputMint: outputMint.mint.toString(),
         amount: inputAmount.toNumber(),
+        onlyDirectRoutes,
         slippageBps: SLIPPAGE_BPS
     };
     const quote: QuoteResponse = await jupApiClient.quoteGet(params);
@@ -39,7 +41,7 @@ export async function getQuote(args: string[]): Promise<QuoteResponse> {
     }
 
     console.log("--- Quote ---");
-    console.log(quote);
+    console.log(JSON.stringify(quote));
     console.log("-------------");
 
     return quote;

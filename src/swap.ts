@@ -21,7 +21,7 @@ export async function swapTokens(args: string[]) {
     const swapResponse: SwapResponse = await jupApiClient.swapPost(swapRequest);
 
     console.log("--- Swap Response ---");
-    console.log(swapResponse);
+    console.log(JSON.stringify(swapResponse));
     console.log("---------------------");
 
     // Sign the txn
