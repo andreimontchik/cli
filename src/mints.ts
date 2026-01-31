@@ -29,6 +29,7 @@ const tokens: TokenMap = {
     WBTC: {mint: new PublicKey("3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"), decimals: 8},
     PYTH: { mint: new PublicKey("HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3"), decimals: 6 }, 
     INF: { mint: new PublicKey("5oVNBeEEQvYi1cX3ir8Dx5n1P7pdxydbGF2X4TxVusJm"), decimals: 9 }, 
+    JUP: { mint: new PublicKey("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"), decimals: 6 },
 }
 export function getToken(symbol: string): TokenInfo | undefined {
     return tokens[symbol];
