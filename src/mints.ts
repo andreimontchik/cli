@@ -27,6 +27,7 @@ const tokens: TokenMap = {
     DRIFT: { mint: new PublicKey("DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7"), decimals: 6 },
     W: { mint: new PublicKey("85VBFQZC9TZkfaptBWjvUw7YbZjy52A6mjtPGjstQAmQ"), decimals: 6 },
     WBTC: {mint: new PublicKey("3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh"), decimals: 8},
+    PYTH: { mint: new PublicKey("HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3"), decimals: 6 }, 
 };
 
 export function getToken(symbol: string): TokenInfo | undefined {
