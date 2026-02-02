@@ -2,7 +2,7 @@
 import BN from 'bn.js';
 import { jupApiClient, SLIPPAGE_BPS } from './common';
 import { QuoteGetRequest, QuoteResponse } from '@jup-ag/api';
-import { getToken } from './mints';
+import { getToken } from './tokens';
 
 export async function getQuote(args: string[]): Promise<QuoteResponse> {
 

@@ -1,4 +1,3 @@
-import { get } from 'http';
 import { QuoteResponse, SwapPostRequest, SwapResponse } from '@jup-ag/api';
 import { getQuote } from './quote';
 import { wallet, jupApiClient, connection } from './common';
