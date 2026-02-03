@@ -32,6 +32,7 @@ const tokens: TokenMap = {
     PYTH: { mint: new PublicKey("HZ1JovNiVvGrGNiiYvEozEVgZ58xaU3RKwX8eACQBCt3"), decimals: 6 }, 
     INF: { mint: new PublicKey("5oVNBeEEQvYi1cX3ir8Dx5n1P7pdxydbGF2X4TxVusJm"), decimals: 9 }, 
     JUP: { mint: new PublicKey("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"), decimals: 6 },
+    ZEC: { mint: new PublicKey ("A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS"), decimals: 8 }, 
 }
 export function getToken(symbol: string): TokenInfo | undefined {
     return tokens[symbol.toUpperCase()];
