@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 if [ -z "$RESEARCH_CLI_PATH" ]; then
-    echo "ERROR: RESEARCH_CLI_PATH is not set."
+    echo "❌ RESEARCH_CLI_PATH is not set."
     exit 1  
 else
     echo "RESEARCH_CLI_PATH is set to: $RESEARCH_CLI_PATH"
 fi
 
 if [ "$#" -ne 3 ]; then
-    echo "Usage: bash quote.sh <INPUT_TOKEN> <INPUT_AMOUNT> <OUTPOUT_TOKEN>"
+    echo "⚠️ Usage: bash quote.sh <INPUT_TOKEN> <INPUT_AMOUNT> <OUTPOUT_TOKEN>"
     exit 1
 fi
 
