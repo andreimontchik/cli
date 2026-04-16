@@ -1,14 +1,8 @@
-import fs from "fs";
-import path from "path";
-
 import * as dotenv from 'dotenv';
 import pino from 'pino';
 import { Keypair, Connection } from '@solana/web3.js';
 import { createJupiterApiClient } from '@jup-ag/api';
-
-import { PublicKey } from '@solana/web3.js';
-
-type TokenMap = Record<string, PublicKey>;
+import { JupiterApi } from './jup';
 
 export const logger = pino({
     level: process.env.LOG_LEVEL || 'info',
@@ -51,3 +45,4 @@ export const jupApiClient = createJupiterApiClient({
     basePath: jupApiUrl,
 } as any);
 
+export const jupiterApi = new JupiterApi(jupApiUrl, jupApiKey, SLIPPAGE_BPS);

@@ -3,6 +3,7 @@ import { logger } from './common';
 import { getQuote } from './quote';
 import { swapTokens } from './swap';
 import { ResponseError } from '@jup-ag/api';
+import { getOrder } from './order';
 
 const command = process.argv[2];
 if (!command) {
@@ -20,6 +21,9 @@ async function main() {
                 break;
             case 'swap':
                 await swapTokens(args);
+                break;
+            case 'order':
+                await getOrder(args);
                 break;
             default:
                 logger.error(`Unsupported command: ${command}`);

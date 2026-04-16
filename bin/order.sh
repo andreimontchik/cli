@@ -7,8 +7,8 @@ else
     echo "RESEARCH_CLI_PATH is set to: $RESEARCH_CLI_PATH"
 fi
 
-if [ "$#" -lt 3 ]; then
-    echo "⚠️ Usage: bash quote.sh <INPUT_TOKEN> <INPUT_AMOUNT> <OUTPOUT_TOKEN> [ONLY_DIRECT_ROUTES: true|false (default: true)]"
+if [ "$#" -ne 3 ]; then
+    echo "⚠️ Usage: bash order.sh <INPUT_TOKEN> <INPUT_AMOUNT> <OUTPOUT_TOKEN>"
     exit 1
 fi
 
@@ -21,6 +21,6 @@ source .env
 set +a
 
 npm run build
-npm run js "quote" "$@"
+npm run js "order" "$@"
 
 popd > /dev/null
