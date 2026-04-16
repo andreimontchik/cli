@@ -2,8 +2,8 @@
 
 Collection of useful command line scripts:
 
-- **quote** - get solana token value
-- **swap** - trade solana tokens
+- **quote** - get supported [solana token](./src/tokens.ts) value
+- **swap** - trade supported [solana tokens](./src/tokens.ts)
 
 ## Setup
 
