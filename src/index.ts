@@ -1,5 +1,3 @@
-import { SendTransactionError } from '@solana/web3.js';
-import { logger } from './common';
 import { getQuote } from './quote';
 import { swapTokens } from './swap';
 import { order } from './order';
@@ -7,7 +5,7 @@ import { execute } from './execute';
 
 const command = process.argv[2];
 if (!command) {
-    logger.error("Missing the command: quote | swap");
+    console.error("Missing the command: quote | swap");
     process.exit(1);
 }
 
@@ -29,7 +27,7 @@ async function main() {
                 await execute(args);
                 break;
             default:
-                logger.error(`Unsupported command: ${command}`);
+                console.error(`Unsupported command: ${command}`);
                 process.exit(1);
         }
     } catch (error) {

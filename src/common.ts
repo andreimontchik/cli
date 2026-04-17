@@ -1,20 +1,6 @@
 import * as dotenv from 'dotenv';
-import pino from 'pino';
 import { Keypair, Connection } from '@solana/web3.js';
 import { JupiterApi } from './jup';
-
-export const logger = pino({
-    level: process.env.LOG_LEVEL || 'info',
-    transport: {
-        target: 'pino-pretty',
-        options: {
-            colorize: true,
-            levelFirst: true,
-            translateTime: 'SYS:yyyy-mm-dd HH:MM:ss.l',
-            ignore: 'pid,hostname'
-        },
-    },
-});
 
 dotenv.config();
 
