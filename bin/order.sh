@@ -20,6 +20,9 @@ set -a
 source .env
 set +a
 
+echo "Compiling TypeScript sources"
+npx tsc
+
 npm run build
 npm run js "order" "$@"
 
