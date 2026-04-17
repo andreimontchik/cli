@@ -136,7 +136,7 @@ export class JupiterApi {
     }
 
     /**
-     * Docs: https://developers.jup.ag/docs/api-reference/swap/v2/order
+     * @see https://developers.jup.ag/docs/api-reference/swap/v2/order
      */
     async getOrder(request: OrderRequest): Promise<Order> {
 
@@ -163,7 +163,7 @@ export class JupiterApi {
     }
 
     /**
-     * Docs: https://developers.jup.ag/docs/api-reference/swap/v2/execute
+     * @see https://developers.jup.ag/docs/api-reference/swap/v2/execute
      */
     async executeOrder(order: Order): Promise<OrderExecuteResponse> {
         if (!order.transaction) {
@@ -200,7 +200,7 @@ export class JupiterApi {
     }
 
     /**
-     * Docs: https://developers.jup.ag/docs/api-reference/swap/v1/swap
+     * @see https://developers.jup.ag/docs/api-reference/swap/v1/swap
      */
     async getSwap(quote: QuoteResponse): Promise<SwapResponse> {
         const response = await fetch(`${this.baseUrl}/swap/v1/swap`, {
@@ -226,7 +226,7 @@ export class JupiterApi {
     }
 
     /**
-     * Docs: https://developers.jup.ag/docs/api-reference/swap/v1/quote
+     * @see https://developers.jup.ag/docs/api-reference/swap/v1/quote
      */
     async getQuote(request: QuoteRequest): Promise<QuoteResponse> {
         const params = new URLSearchParams({
