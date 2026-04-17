@@ -12,18 +12,5 @@ if [ "$#" -ne 3 ]; then
     exit 1
 fi
 
-set -euo pipefail
-
-pushd $RESEARCH_CLI_PATH > /dev/null
-
-set -a
-source .env
-set +a
-
-echo "Compiling TypeScript sources"
-npx tsc
-
-npm run build
-npm run js "execute" "$@"
-
-popd > /dev/null
+source  "$RESEARCH_CLI_PATH/bin/common.sh"
+run_research_cli execute "$@"

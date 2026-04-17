@@ -11,18 +11,5 @@ if [ "$#" -lt 3 ]; then
     exit 1
 fi
 
-set -euo pipefail
-
-pushd $RESEARCH_CLI_PATH > /dev/null
-
-set -a
-source .env
-set +a
-
-echo "Compiling TypeScript sources"
-npx tsc
-
-echo "Running the swap"
-npm run js "swap" "$@"
-
-popd > /dev/null
+source  "$RESEARCH_CLI_PATH/bin/common.sh"
+run_research_cli swap "$@"
