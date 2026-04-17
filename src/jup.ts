@@ -1,5 +1,5 @@
 import BN from 'bn.js';
-import { PublicKey } from "@solana/web3.js";
+import { PublicKey, VersionedTransaction } from "@solana/web3.js";
 import { wallet } from "./common";
 
 export type OrderRequest = {
@@ -8,7 +8,7 @@ export type OrderRequest = {
     amount: BN;
 }
 
-export type OrderResponse = {
+export type Order = {
     mode: string;
     inputMint: string;
     outputMint: string;
@@ -30,12 +30,24 @@ export type OrderResponse = {
     };
     router?: string;
     transaction?: string;
+    lastValidBlockHeight?: string;
     requestId?: string;
     totalTime?: number;
     expireAt?: string;
     errorCode?: number;
     errorMessage?: string;
+}
+
+export type OrderExecuteResponse = {
+    status: string;
+    signature: string;
+    slot: string;
     error?: string;
+    code: number;
+    totalInputAmount: string;
+    totalOutputAmount: string;
+    inputAmountResult: string;
+    outputAmountResult: string;
 }
 
 export class JupiterApi {
@@ -50,7 +62,7 @@ export class JupiterApi {
         this.slippageBps = slippageBps;
     }
 
-    async getOrder(request: OrderRequest): Promise<OrderResponse> {
+    async getOrder(request: OrderRequest): Promise<Order> {
 
         const params = new URLSearchParams({
             inputMint: request.inputMint.toString(),
@@ -65,13 +77,46 @@ export class JupiterApi {
                 "x-api-key": `${this.apiKey}`
             },
         });
-
         if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Order failed! Response: HTTP ${response.status} ${response.statusText}: ${errorText}`);
+            throw new Error(`Unexpected response: ${response.status} ${response.statusText}: ${errorText}`);
         }
 
-        const orderResponse: OrderResponse = await response.json();
-        return orderResponse;
+        const result: Order = await response.json();
+        return result;
+    }
+
+    async executeOrder(order: Order): Promise<OrderExecuteResponse> {
+        if (!order.transaction) {
+            throw new Error(`No transaction in the order: ${JSON.stringify(order)}`);
+            process.exit(1);
+        }
+
+        const tx = VersionedTransaction.deserialize(
+            Buffer.from(order.transaction, "base64"),
+        );
+        tx.sign([wallet]);
+
+        const signedTxBuffer = Buffer.from(tx.serialize()).toString("base64");
+
+        const response = await fetch(`${this.baseUrl}/swap/v2/execute`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-api-key": `${this.apiKey}`,
+            },
+            body: JSON.stringify({
+                signedTransaction: signedTxBuffer,
+                requestId: order.requestId,
+                lastValidBlockHeight: order.lastValidBlockHeight
+            }),
+        });
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Unexpected response: ${response.status} ${response.statusText}: ${errorText}`);
+        }
+
+        const result: OrderExecuteResponse = await response.json();
+        return result;
     }
 }

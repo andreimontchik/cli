@@ -1,7 +1,7 @@
-import { getOrder } from '../src/order';
+import { order } from '../src/order';
 
 async function main() {
-    const order = await getOrder(["WSOL", "1", "USDC"]);
+    await order(["USDC", "1", "WSOL"]);
 }
 
 main();
