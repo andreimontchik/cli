@@ -1,8 +1,8 @@
 
 import BN from 'bn.js';
-import { jupApiClient, SLIPPAGE_BPS } from './common';
-import { QuoteGetRequest, QuoteResponse } from '@jup-ag/api';
+import { jupiterApi, SLIPPAGE_BPS } from './common';
 import { getToken } from './tokens';
+import { QuoteRequest, QuoteResponse } from './jup';
 
 export async function getQuote(args: string[]): Promise<QuoteResponse> {
 
@@ -28,19 +28,19 @@ export async function getQuote(args: string[]): Promise<QuoteResponse> {
 
     console.log(`Quoting ${inputAmountStr} of ${inputToken} in ${outputToken}... `);
 
-    const params: QuoteGetRequest = {
+    const params: QuoteRequest = {
         inputMint: inputMint.mint.toString(),
         outputMint: outputMint.mint.toString(),
         amount: inputAmount.toNumber(),
         onlyDirectRoutes,
         slippageBps: SLIPPAGE_BPS
     };
-    const quote: QuoteResponse = await jupApiClient.quoteGet(params);
+    const quote: QuoteResponse = await jupiterApi.getQuote(params);
     if (!quote) {
         throw new Error("Quote response is empty");
     }
 
-    console.log("--- Quote ---");
+    console.log("--- Quote Response ---");
     console.log(JSON.stringify(quote));
     console.log("-------------");
 

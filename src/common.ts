@@ -1,7 +1,6 @@
 import * as dotenv from 'dotenv';
 import pino from 'pino';
 import { Keypair, Connection } from '@solana/web3.js';
-import { createJupiterApiClient } from '@jup-ag/api';
 import { JupiterApi } from './jup';
 
 export const logger = pino({
@@ -39,10 +38,5 @@ export const SLIPPAGE_BPS = process.env.SLIPPAGE_BPS ? parseInt(process.env.SLIP
     : (() => { throw new Error('Environment variable SLIPPAGE_BPS is not set.'); })();
 
 export const connection = new Connection(rpcUrl, 'confirmed');
-
-export const jupApiClient = createJupiterApiClient({
-    apiKey: jupApiKey,
-    basePath: jupApiUrl,
-} as any);
 
 export const jupiterApi = new JupiterApi(jupApiUrl, jupApiKey, SLIPPAGE_BPS);

@@ -2,7 +2,6 @@ import { SendTransactionError } from '@solana/web3.js';
 import { logger } from './common';
 import { getQuote } from './quote';
 import { swapTokens } from './swap';
-import { ResponseError } from '@jup-ag/api';
 import { order } from './order';
 import { execute } from './execute';
 
@@ -35,13 +34,8 @@ async function main() {
         }
     } catch (error) {
         console.error(`Failed to run the script:`);
-        if (error instanceof ResponseError) {
-            console.error(await error.response.json());
-        } else if (error instanceof SendTransactionError) {
-            console.error(error.message);
-        } else {
-            console.error(error);
-        }
+        console.error(error);
+
         process.exit(1);
     }
 }

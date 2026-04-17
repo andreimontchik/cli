@@ -38,6 +38,8 @@ export async function execute(args: string[]) {
     console.log(JSON.stringify(orderResponse));
     console.log("-------------");
 
+    console.log(`Executing the swap of ${orderResponse.inAmount} ${orderResponse.inputMint}} to ${orderResponse.outAmount} ${orderResponse.outputMint}...`);
+
     const executeResponse = await jupiterApi.executeOrder(orderResponse);
     console.log("--- Order Execute Response ---");
     console.log(JSON.stringify(executeResponse));

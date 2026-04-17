@@ -1,23 +1,15 @@
-import { QuoteResponse, SwapPostRequest, SwapResponse } from '@jup-ag/api';
 import { getQuote } from './quote';
-import { wallet, jupApiClient, connection } from './common';
+import { wallet, connection, jupiterApi } from './common';
 import { BlockheightBasedTransactionConfirmationStrategy, VersionedTransaction } from "@solana/web3.js";
+import { QuoteResponse, SwapResponse } from './jup';
 
 export async function swapTokens(args: string[]) {
+
     const quote: QuoteResponse = await getQuote(args);
 
-    console.log(`Swapping  ${quote.inAmount} of ${quote.inputMint}} to ${quote.outAmount} of ${quote.outputMint}...`);
+    console.log(`Swapping  ${quote.inAmount} ${quote.inputMint}} to ${quote.outAmount} ${quote.outputMint}...`);
 
-    const swapRequest: SwapPostRequest = {
-        swapRequest: {
-            quoteResponse: quote,
-            userPublicKey: wallet.publicKey.toBase58(),
-            dynamicComputeUnitLimit: true,
-            wrapAndUnwrapSol: false,
-        }
-    };
-
-    const swapResponse: SwapResponse = await jupApiClient.swapPost(swapRequest);
+    const swapResponse: SwapResponse = await jupiterApi.getSwap(quote);
 
     console.log("--- Swap Response ---");
     console.log(JSON.stringify(swapResponse));
@@ -35,17 +27,19 @@ export async function swapTokens(args: string[]) {
 
     console.log(`Sending the transaction...`);
     const signature = await connection.sendTransaction(transaction);
+    console.log(`Tx sig: ${signature}`);
 
     const strategy: BlockheightBasedTransactionConfirmationStrategy = {
         signature,
         blockhash: latestBlockhash.blockhash,
         lastValidBlockHeight: latestBlockhash.lastValidBlockHeight,
+
     };
+
+    console.log("Waiting for tx confirmation...");
     const confirmation = await connection.confirmTransaction(strategy, "confirmed");
 
-    console.log("--- Txn Confirmation ---");
+    console.log("--- Tx Confirmation ---");
     console.log(confirmation);
     console.log("------------------------");
-
-    console.log(`Transaction is confirmed: ${JSON.stringify(confirmation)}`)
 }
