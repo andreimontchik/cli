@@ -1,4 +1,4 @@
-# cli
+# cli 1
 
 A collection of useful command-line scripts for interacting with the Solana ecosystem.
 
