@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "main": "dist/index.js",
     "scripts": {
-        "ts": "ts-node src/index.ts",
+        "ts": "tsx src/index.ts",
         "build": "tsc",
         "js": "node dist/index.js"
     },
@@ -14,7 +14,7 @@
     },
     "devDependencies": {
         "@types/bn.js": "^5.2.0",
-        "ts-node": "^10.9.2",
+        "tsx": "^4.21.0",
         "typescript": "^6.0.2"
     }
 }
