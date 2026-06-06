@@ -33,7 +33,8 @@ const tokens: TokenMap = {
     INF: { mint: new PublicKey("5oVNBeEEQvYi1cX3ir8Dx5n1P7pdxydbGF2X4TxVusJm"), decimals: 9 },
     JUP: { mint: new PublicKey("JUPyiwrYJFskUPiHa7hkeR8VUtAeFoSYbKedZNsDvCN"), decimals: 6 },
     ZEC: { mint: new PublicKey("A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS"), decimals: 8 },
-    BONK: { mint: new PublicKey("DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"), decimals: 5 }
+    BONK: { mint: new PublicKey("DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263"), decimals: 5 },
+    picoSOL: { mint: new PublicKey("picobAEvs6w7QEknPce34wAE4gknZA9v5tTonnmHYdX"), decimals: 9 },
 }
 
 export function getToken(symbol: string): TokenInfo | undefined {

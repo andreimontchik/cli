@@ -20,7 +20,7 @@ A collection of useful command-line scripts for interacting with the Solana ecos
 1. Configure aliases for running shell scripts in `.bashrc`:
 
    ```
-   alias tokens="cat $RESEARCH_CLI_PATH/tokens.json"
+   alias tokens="cat $RESEARCH_CLI_PATH/src/tokens.ts"
    alias quote="$RESEARCH_CLI_PATH/bin/quote.sh"
    alias swap="$RESEARCH_CLI_PATH/bin/swap.sh"
    alias order="$RESEARCH_CLI_PATH/bin/order.sh"
