@@ -2,7 +2,7 @@
 
 A collection of useful command-line scripts for interacting with the Solana ecosystem.
 
-- **tokens** - list of supported [tokens](./tokens.json)
+- **tokens** - list of supported [tokens](./src/tokens.ts)
 - **quote** - quote token swap
 - **swap** - quote and swap tokens
 - **order** - get the tokens swap order
