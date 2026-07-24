@@ -2,15 +2,15 @@
 
 A collection of useful command-line scripts for interacting with the Solana ecosystem.
 
-- **tokens** - list of supported [tokens]
-- **quote** - qoute token swap
+- **tokens** - list of supported [tokens](./tokens.json)
+- **quote** - quote token swap
 - **swap** - quote and swap tokens
 - **order** - get the tokens swap order
-- **execute** - get and exectute the tokens swap order
+- **execute** - get and execute the tokens swap order
 
 ## Setup
 
-1. Install [NodeJS](https://github.com/andreimontchik/research/wiki/JavaScript#nodejs) and [TypeScript](https://github.com/andreimontchik/research/wiki/JavaScript#typescript)
+1. Install [NodeJS](https://github.com/andreimontchik/docs/blob/main/languages/JavaScript.md#nodejs) and [TypeScript](https://github.com/andreimontchik/docs/blob/main/languages/JavaScript.md#typescript)
 1. Clone the repository and navigate into it.
 1. Switch to the required NodeJS version specified in the [.nvmrc](./.nvmrc) file: `nvm use`
 1. Install dependencies from the [package.json](./package.json) file: `npm install`
@@ -19,7 +19,7 @@ A collection of useful command-line scripts for interacting with the Solana ecos
 1. Set the "RESEARCH_CLI_PATH" env variable in `.bashrc`: `export RESEARCH_CLI_PATH="$HOME/work/src/research/cli"`
 1. Configure aliases for running shell scripts in `.bashrc`:
 
-   ```
+   ```bash
    alias tokens="cat $RESEARCH_CLI_PATH/src/tokens.ts"
    alias quote="$RESEARCH_CLI_PATH/bin/quote.sh"
    alias swap="$RESEARCH_CLI_PATH/bin/swap.sh"
